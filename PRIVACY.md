@@ -1,10 +1,10 @@
-# Privacy Policy for Interpreter
+# Privacy Policy for AI Private Interpreter
 
 **Last updated: May 14, 2026**
 
 ## Overview
 
-Interpreter ("the App") is a real-time speech translation app for iOS. We are committed to protecting your privacy.
+AI Private Interpreter ("the App") is a real-time speech translation app for iOS. We are committed to protecting your privacy.
 
 ## Data Collection
 
