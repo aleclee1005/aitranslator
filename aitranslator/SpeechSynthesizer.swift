@@ -12,9 +12,14 @@ class SpeechSynthesizer: NSObject {
 
     func speak(_ text: String, language: Language) {
         synthesizer.stopSpeaking(at: .immediate)
+        try? AVAudioSession.sharedInstance().setCategory(
+            .playAndRecord, mode: .spokenAudio,
+            options: [.defaultToSpeaker, .allowBluetooth]
+        )
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(language: language.rawValue)
         utterance.rate = AVSpeechUtteranceDefaultSpeechRate
+        utterance.volume = 1.0
         synthesizer.speak(utterance)
     }
 

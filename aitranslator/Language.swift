@@ -27,4 +27,13 @@ enum Language: String, CaseIterable, Identifiable {
     }
 
     var sttLocale: Locale { Locale(identifier: rawValue) }
+
+    var appleLocale: String {
+        switch self {
+        case .chinese:  return "zh-Hans"
+        case .english:  return "en"
+        case .japanese: return "ja"
+        case .korean:   return "ko"
+        }
+    }
 }

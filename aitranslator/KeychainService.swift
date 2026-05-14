@@ -22,8 +22,7 @@ enum KeychainService {
             kSecValueData as String: data,
             kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock
         ]
-        let status = SecItemAdd(addQuery as CFDictionary, nil)
-        print("🔐 Keychain save '\(key)': \(status == errSecSuccess ? "OK" : "Error \(status)")")
+        SecItemAdd(addQuery as CFDictionary, nil)
     }
 
     static func load(key: String) -> String? {

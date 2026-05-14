@@ -1,11 +1,5 @@
-//
-//  aitranslatorApp.swift
-//  aitranslator
-//
-//  Created by Alec Lee on 2026/05/07.
-//
-
 import SwiftUI
+import SwiftData
 
 @main
 struct aitranslatorApp: App {
@@ -13,5 +7,6 @@ struct aitranslatorApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: [Session.self, TranscriptEntry.self])
     }
 }

@@ -14,7 +14,7 @@ class SpeechRecognitionManager {
     private var recognitionTask: SFSpeechRecognitionTask?
     private var recognizer: SFSpeechRecognizer?
     private var silenceTimer: Timer?
-    private var lastSentText = ""
+    var lastSentText = ""
 
     func requestPermissions() async -> Bool {
         let speechGranted = await withCheckedContinuation { cont in
@@ -26,11 +26,25 @@ class SpeechRecognitionManager {
         return speechGranted && micGranted
     }
 
-    func start(language: Language) throws {
+    func start(language: Language, mode: RecognitionMode = .personal) throws {
         stop()
         errorMessage = nil
         recognizedText = ""
         lastSentText = ""
+
+        let session = AVAudioSession.sharedInstance()
+        switch mode {
+        case .personal:
+            try session.setCategory(.playAndRecord, mode: .spokenAudio,
+                                    options: [.defaultToSpeaker, .allowBluetooth])
+        case .meeting:
+            try session.setCategory(.playAndRecord, mode: .measurement,
+                                    options: [.defaultToSpeaker, .allowBluetooth])
+            if session.isInputGainSettable {
+                try? session.setInputGain(1.0)
+            }
+        }
+        try session.setActive(true)
 
         recognizer = SFSpeechRecognizer(locale: language.sttLocale)
 
@@ -89,8 +103,20 @@ class SpeechRecognitionManager {
             guard let self else { return }
             let current = self.recognizedText
             guard !current.isEmpty, current != self.lastSentText else { return }
+
+            // Extract only the new portion since last completed sentence
+            let previous = self.lastSentText
+            let newPortion: String
+            if !previous.isEmpty, current.count > previous.count, current.hasPrefix(previous) {
+                let idx = current.index(current.startIndex, offsetBy: previous.count)
+                newPortion = String(current[idx...]).trimmingCharacters(in: .whitespacesAndNewlines)
+            } else {
+                newPortion = current
+            }
+
             self.lastSentText = current
-            self.onSentenceComplete?(current)
+            guard !newPortion.isEmpty else { return }
+            self.onSentenceComplete?(newPortion)
         }
     }
 }

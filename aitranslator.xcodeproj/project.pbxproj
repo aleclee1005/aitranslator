@@ -192,6 +192,9 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				ja,
+				ko,
 			);
 			mainGroup = C96F6E782FAC184000560F23;
 			minimizedProjectReferenceProxies = 1;
@@ -398,8 +401,11 @@
 				DEVELOPMENT_TEAM = Q623WXG439;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "需要麦克风权限进行实时语音识别";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "需要语音识别权限将会议内容转为文字";
+				INFOPLIST_KEY_CFBundleDisplayName = Interpreter;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access is needed for real-time speech recognition and translation.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Speech recognition converts your voice into text so it can be translated.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -432,8 +438,11 @@
 				DEVELOPMENT_TEAM = Q623WXG439;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "需要麦克风权限进行实时语音识别";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "需要语音识别权限将会议内容转为文字";
+				INFOPLIST_KEY_CFBundleDisplayName = Interpreter;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access is needed for real-time speech recognition and translation.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Speech recognition converts your voice into text so it can be translated.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
