@@ -8,11 +8,16 @@ AI Private Interpreter ("the App") is a real-time speech translation app for iOS
 
 ## Data Collection
 
-**We do not collect, store, or transmit any personal data.**
+Data handling depends on which translation engine you choose:
 
+**Apple Translation (default):**
 - All speech recognition is performed on-device using Apple's Speech framework.
-- Translation via Apple Translation is performed entirely on-device; no audio or text leaves your device.
-- When using the optional Groq cloud translation engine, only the recognized text (not audio) is sent to Groq's API for translation. No user identifiers are attached.
+- Translation is performed entirely on-device. No audio or text ever leaves your device.
+
+**Groq Cloud Translation (optional, requires your consent):**
+- Speech recognition remains on-device. Only the recognized text (not audio) is sent to Groq's API for translation.
+- No user identifiers, account information, or audio is transmitted.
+- You will be asked for explicit consent before this engine is activated. You may switch back to Apple Translation at any time.
 
 ## Microphone and Speech Recognition
 

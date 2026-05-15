@@ -5,6 +5,7 @@ struct SettingsView: View {
     @State private var settings = AppSettings.shared
     @State private var apiKey = ""
     @State private var showKey = false
+    @State private var showGroqConsent = false
 
     var body: some View {
         NavigationStack {
@@ -28,6 +29,15 @@ struct SettingsView: View {
             }
             .onAppear {
                 apiKey = KeychainService.load(key: "groq_api_key") ?? ""
+            }
+            .alert("Data Sharing Consent", isPresented: $showGroqConsent) {
+                Button("I Agree") {
+                    UserDefaults.standard.set(true, forKey: "groqConsentGranted")
+                    settings.translationEngine = .groq
+                }
+                Button("Cancel", role: .cancel) { }
+            } message: {
+                Text("When using the Groq engine, the text recognized from your speech will be sent to Groq, Inc. (api.groq.com) for translation.\n\nNo audio, user identifiers, or personal information is transmitted. You can review Groq's privacy policy at groq.com/privacy-policy.\n\nDo you consent to sending recognized text to Groq?")
             }
         }
     }
@@ -99,7 +109,11 @@ struct SettingsView: View {
         subtitle: String
     ) -> some View {
         Button {
-            withAnimation { settings.translationEngine = engine }
+            if engine == .groq && !UserDefaults.standard.bool(forKey: "groqConsentGranted") {
+                showGroqConsent = true
+            } else {
+                withAnimation { settings.translationEngine = engine }
+            }
         } label: {
             HStack(spacing: 14) {
                 Image(systemName: icon)
